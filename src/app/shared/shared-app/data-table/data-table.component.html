@@ -1,0 +1,41 @@
+  <div class="row mt-2 mb-2">
+    <div class="col-12">
+      <h3>
+        {{ heading }}
+      </h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <table class="table" *ngIf="tableHeader?.length > 0">
+        <thead>
+          <tr>
+            <th *ngFor="let th of tableHeader">
+              {{ th?.header }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="tableBody?.length > 0 else emptyTable">
+            <tr *ngFor="let row of tableBody ; let i = index">
+              <td *ngFor="let key of tableHeader" [ngClass]="key?.class" class="column-width">
+                {{ getBodyValue(row , key.field) }}
+              </td>
+              <ng-container *ngIf="rowActions && rowActions?.length > 0">
+                <td *ngFor="let action of rowActions">
+                  <button (click)="handleAction(action, row , i)"
+                    class="btn btn-outline-danger btn-sm">{{ action }}</button>
+                </td>
+              </ng-container>
+            </tr>
+          </ng-container>
+          <ng-template #emptyTable>
+            <tr [attr.colspan]="tableHeader.length + 1">
+              {{ isLoading ? 'Loading...' : 'No Results Found' }}
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>

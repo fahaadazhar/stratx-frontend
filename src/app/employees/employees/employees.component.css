@@ -1,0 +1,7 @@
+.move-right {
+    float: right;
+}
+
+.is-invalid {
+    border-color: red;
+}

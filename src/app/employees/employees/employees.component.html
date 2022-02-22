@@ -1,0 +1,77 @@
+<nav class="navbar sticky-top navbar-light bg-light">
+  <div class="container-fluid w-50">
+    <label for="search-user" class="col-sm-2 col-form-label">Search for employee:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="search-user" placeholder="Enter a name"
+        (keyup)="searchEmployee($event)">
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <app-data-table [heading]="'Users'" [tableBody]="user_role" [tableHeader]="header" [rowActions]="actions"
+        (actionEvent)="handleAction($event)"></app-data-table>
+
+      <app-data-table [heading]="'Senior Users'" [tableBody]="senior_user_role" [tableHeader]="header"
+        [rowActions]="actions" (actionEvent)="handleAction($event)"></app-data-table>
+
+      <app-data-table [heading]="'WFM'" [tableBody]="wfm_role" [tableHeader]="header" [rowActions]="actions"
+        (actionEvent)="handleAction($event)"></app-data-table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <button id="add-user" class="btn btn-primary mt-5" (click)="addNewEmployee()">Add User</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Employee Modal -->
+<ng-template #addEmployee let-dismiss="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title het-txt" id="modal-basic-title">Add a new user</h4>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="employeeForm">
+      <div class="row mb-3">
+        <div class="col-12">
+          <label>First Name</label>
+          <input class="form-control" name="firstName" formControlName="firstName" placeholder="Mark"
+            [ngClass]="{ 'is-invalid': submittedForm && of.firstName.errors}">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <label>Last Name</label>
+          <input class="form-control" name="lastName" formControlName="lastName" placeholder="Otto"
+            [ngClass]="{ 'is-invalid': submittedForm && of.lastName.errors}">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="input-container">
+            <label>Select Role</label>
+            <select class="form-control" name="role" formControlName="role"
+              [ngClass]="{ 'is-invalid': submittedForm && of.role.errors}">
+              <option value="">Select a role</option>
+              <option *ngFor="let r of roles" [value]="r.id">{{ r.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">
+      Close
+    </button>
+    <button type="button" class="btn btn-primary" (click)="post()">
+      Save Changes
+    </button>
+  </div>
+</ng-template>
