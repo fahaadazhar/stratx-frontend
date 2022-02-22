@@ -25,3 +25,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+Demo Video URL:
+https://www.loom.com/share/aabf94f4db2d4de1a4be098cc4138626
+
+Answers:I have spent 3 hours and if i got more time i will work and add Route Guarding, implement Interceptor , works on Module and improve table reusability method
